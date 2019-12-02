@@ -2,14 +2,13 @@
 const scrapeIt = require("scrape-it");
 const unzip = require("unzipper");
 const rimraf = require("rimraf");
-const url = require("url");
 
-function nowInEVETime(namestring) {
+function nowInEVETime(nameString) {
     const now = new Date();
     const year = now.getUTCFullYear() - 2017 + 119; // 2017 is YC 119
     const month = now.getUTCMonth();
     const day = now.getUTCDate();
-    return `${year}.${month}.${day}+${namestring}`;
+    return `${year}.${month}.${day}+${nameString}`;
 }
 
 scrapeIt("https://developers.eveonline.com/resource/resources", {
@@ -20,7 +19,7 @@ scrapeIt("https://developers.eveonline.com/resource/resources", {
     const versionedFilename = scrape.versioned_filename;
     if (typeof link !== "string" || typeof versionedFilename !== "string") throw new Error("Couldn't scrape SDE link!");
     const filename = require("path").basename(require("url").parse(versionedFilename).pathname);
-    const processedVersionName = filename.substring(0, filename.length - "_Types.zip".length).replace(/_/g, "-") // Remove _Types.zip
+    const processedVersionName = filename.substring(0, filename.length - "_Types.zip".length).replace(/_/g, "-"); // Remove _Types.zip
     const current = require("../package.json").version;
     const currNameString = current.match(/(\d+)\.(\d+)\.(\d+)\+(.*)/);
     if (currNameString !== null && currNameString[4] === processedVersionName) return console.log(`Already at version ${processedVersionName}, not redownloading SDE.`);
@@ -35,7 +34,7 @@ scrapeIt("https://developers.eveonline.com/resource/resources", {
     const file = fs.createWriteStream("sde.zip");
 
     console.log(`Downloading ${link} as sde.zip...`);
-    const request = https.get(link, response => {
+    https.get(link, response => {
         let size = 0;
         const responseSize = response.headers["content-length"];
         console.log(`Response size is ${responseSize} bytes.`);
