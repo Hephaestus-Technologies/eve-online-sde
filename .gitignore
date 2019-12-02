@@ -38,3 +38,6 @@ jspm_packages
 
 # SDE zip file from auto-update
 sde.zip
+
+# WebStorm project files
+.idea/

@@ -12,5 +12,5 @@ export function skins(): Promise<any>;
 export function tournamentRules(): Promise<any>;
 export function landmarks(): Promise<any>;
 export function region(name: string): Promise<any>;
-export function lookup(name: string, lang = "en"): Promise<any>;
+export function lookup(name: string, lang): Promise<any>;
 export function lookupByID(id: number): Promise<any>;
