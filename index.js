@@ -1,15 +1,15 @@
 const loadFile = require("./load_file");
 
-function memoize(f) {
+const memoize = (func) => {
     let result;
     let run = false;
-    return (...args) => {
+    return () => {
         if (run) return result;
         run = true;
-        result = f(...args);
+        result = func();
         return result;
     }
-}
+};
 
 const fdeMap = {
     "types": "typeIDs",
@@ -31,23 +31,23 @@ for (const key of Object.keys(fdeMap)) {
 
 exports.landmarks = memoize(() => loadFile("fsd", "landmarks", "landmarks"));
 
-exports.region = (name) => {
-    return loadFile("fsd", "universe", "eve", name, "region")
-        .catch(() => {
-            return loadFile("fsd", "universe", "wormhole", name, "region");
-        });
+exports.region = async (name) => {
+    try {
+        return await loadFile("fsd", "universe", "eve", name, "region")
+    }
+    catch(e) {
+        return await loadFile("fsd", "universe", "wormhole", name, "region");
+    }
 };
 
-exports.lookup = (name, lang) => {
-    lang = lang || "en";
-    return exports.types().then((types) => {
-        return Object.keys(types).map(id => [id, types[id]]).filter(([, type]) => type.name && type.name[lang] && type.name[lang].startsWith(name)).map(([id, type]) => {
-            type.id = +id;
-            return type;
-        })[0];
-    });
+exports.lookup = async (query, lang = "en") => {
+    const types = await exports.types();
+    return Object.entries(types).filter(matches(query, lang));
 };
 
-exports.lookupByID = (id) => {
-    return exports.types().then(types => types[id]);
+const matches = (query, lang) => ([, type]) => type.name[lang].includes(query);
+
+exports.lookupById = async (id) => {
+    const types = await exports.types();
+    return types[id] || null;
 };
