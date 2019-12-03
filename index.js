@@ -1,40 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-const jsYaml = require("js-yaml");
-
-exports.raw = (...yamlPath) => {
-    const filepath = ["sde", ...yamlPath].filter(x => x.indexOf("/") === -1 && x.indexOf("\\") === -1).join("/");
-    return new Promise((resolve, reject) => {
-        fs.stat(path.join(__dirname, `${filepath}.yaml`), (err) => {
-            if (err) {
-                fs.stat(path.join(__dirname, `${filepath}.staticdata`), (err) => {
-                    if (err) {
-                        reject(err)
-                    }
-                    else {
-                        resolve(path.join(__dirname, `${filepath}.staticdata`));
-                    }
-                });
-            }
-            else {
-                resolve(path.join(__dirname, `${filepath}.yaml`));
-            }
-        });
-    }).then(path => {
-        return new Promise((resolve, reject) => {
-            fs.readFile(path, "utf-8", (err, data) => {
-                if (err) return reject(err);
-                try {
-                    const obj = jsYaml.safeLoad(data);
-                    return resolve(obj);
-                }
-                catch (e) {
-                    return reject(e);
-                }
-            });
-        });
-    });
-};
+const loadFile = require("./load_file");
 
 function memoize(f) {
     let result;
@@ -62,17 +26,15 @@ const fdeMap = {
 };
 
 for (const key of Object.keys(fdeMap)) {
-    exports[key] = memoize(() => {
-        return exports.raw("fsd", fdeMap[key]);
-    });
+    exports[key] = memoize(() => loadFile("fsd", fdeMap[key]));
 }
 
-exports.landmarks = memoize(() => exports.raw("fsd", "landmarks", "landmarks"));
+exports.landmarks = memoize(() => loadFile("fsd", "landmarks", "landmarks"));
 
 exports.region = (name) => {
-    return exports.raw("fsd", "universe", "eve", name, "region")
+    return loadFile("fsd", "universe", "eve", name, "region")
         .catch(() => {
-            return exports.raw("fsd", "universe", "wormhole", name, "region"); 
+            return loadFile("fsd", "universe", "wormhole", name, "region");
         });
 };
 
