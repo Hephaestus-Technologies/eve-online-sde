@@ -45,7 +45,9 @@ exports.lookup = async (query, lang = "en") => {
     return Object.entries(types).filter(matches(query, lang));
 };
 
-const matches = (query, lang) => ([, type]) => type.name[lang].includes(query);
+const matches = (query, lang) => ([, type]) => {
+    return type.name && type.name[lang] && type.name[lang].includes( query );
+};
 
 exports.lookupById = async (id) => {
     const types = await exports.types();
