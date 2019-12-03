@@ -1,5 +1,5 @@
 {
-  "name": "eve-online-sde",
+  "name": "@hephaestus-technologies/eve-online-sde",
   "version": "1.0.0",
   "description": "Just a package exposing the data from the EVE Online static data export",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/weswigham/eve-online-sde.git"
+    "url": "git+https://github.com/hephaestus-technologies/eve-online-sde.git"
   },
   "keywords": [
     "eve",
@@ -35,5 +35,8 @@
     "rimraf": "^2.6.1",
     "scrape-it": "^3.3.0",
     "unzipper": "^0.8.8"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
