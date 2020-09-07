@@ -1,13 +1,11 @@
 const loadFile = require("./load_file");
 
 const memoize = (func) => {
-    let result;
-    let run = false;
-    return () => {
-        if (run) return result;
-        run = true;
-        result = func();
-        return result;
+    const results = {};
+    return async (...args) => {
+        const key = args.length ? args.join("") : "__empty__";
+        if (!results[key])  results[key] = await func(...args) || "__empty__";
+        return results[key] ;
     }
 };
 
@@ -31,25 +29,25 @@ for (const key of Object.keys(fdeMap)) {
 
 exports.landmarks = memoize(() => loadFile("fsd", "landmarks", "landmarks"));
 
-exports.region = async (name) => {
+exports.region = memoize(async (name) => {
     try {
         return await loadFile("fsd", "universe", "eve", name, "region")
     }
     catch(e) {
         return await loadFile("fsd", "universe", "wormhole", name, "region");
     }
-};
+});
 
-exports.lookup = async (query, lang = "en") => {
+exports.lookup = memoize(async (query, lang = "en") => {
     const types = await exports.types();
     return Object.entries(types).filter(matches(query, lang));
-};
+});
 
 const matches = (query, lang) => ([, type]) => {
     return type.name && type.name[lang] && type.name[lang].includes( query );
 };
 
-exports.lookupById = async (id) => {
+exports.lookupById = memoize(async (id) => {
     const types = await exports.types();
     return types[id] || null;
-};
+});
