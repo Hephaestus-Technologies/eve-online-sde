@@ -23,8 +23,8 @@ const fdeMap = {
     "tournamentRules": "tournamentRuleSets"
 };
 
-for (const key of Object.keys(fdeMap)) {
-    exports[key] = memoize(() => loadFile("fsd", fdeMap[key]));
+for (const [key, value] of Object.entries(fdeMap)) {
+    exports[key] = memoize(() => loadFile("fsd", value));
 }
 
 exports.landmarks = memoize(() => loadFile("fsd", "landmarks", "landmarks"));
