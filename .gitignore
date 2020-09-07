@@ -41,3 +41,5 @@ sde.zip
 
 # WebStorm project files
 .idea/
+
+package-lock.json
