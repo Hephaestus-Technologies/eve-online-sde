@@ -1,16 +1,10 @@
 {
   "name": "@hephaestus-technologies/eve-online-sde",
   "version": "122.8.7+Invasion-1.0",
-  "description": "Just a package exposing the data from the EVE Online static data export",
+  "description": "Just an API exposing the data from the EVE Online static data export",
   "main": "index.js",
-  "types": "index.d.ts",
   "scripts": {
-    "test": "mocha test --timeout 10000",
     "update-sde": "node ./scripts/update-sde.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hephaestus-technologies/eve-online-sde.git"
   },
   "keywords": [
     "eve",
@@ -22,22 +16,13 @@
   ],
   "author": "Wesley Wigham (weswigham)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/weswigham/eve-online-sde/issues"
-  },
-  "homepage": "https://github.com/weswigham/eve-online-sde#readme",
   "dependencies": {
     "express": "^4.17.1",
     "js-yaml": "^3.10.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0",
     "rimraf": "^2.6.1",
     "scrape-it": "^3.3.0",
     "unzipper": "^0.8.8"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   }
 }
