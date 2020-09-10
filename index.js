@@ -1,53 +1,60 @@
 const loadFile = require("./load_file");
 
-const memoize = (func) => {
-    const results = {};
-    return async (...args) => {
-        const key = args.length ? args.join("") : "__empty__";
-        if (!results[key])  results[key] = await func(...args) || "__empty__";
-        return results[key] ;
-    }
-};
+exports.types = () => loadFile("fsd", "typeIDs");
 
-const fdeMap = {
-    "types": "typeIDs",
-    "icons": "iconIDs",
-    "categories": "categoryIDs",
-    "blueprints": "blueprints",
-    "certificates": "certificates",
-    "graphics": "graphicIDs",
-    "groups": "groupIDs",
-    "skinMaterials": "skinMaterials",
-    "skinLicenses": "skinLicenses",
-    "skins": "skins",
-    "tournamentRules": "tournamentRuleSets"
-};
+exports.icons = () => loadFile("fsd", "iconIDs");
 
-for (const [key, value] of Object.entries(fdeMap)) {
-    exports[key] = memoize(() => loadFile("fsd", value));
-}
+exports.blueprints = () => loadFile("fsd", "blueprints");
 
-exports.landmarks = memoize(() => loadFile("fsd", "landmarks", "landmarks"));
+exports.certificates = () => loadFile("fsd", "certificates");
 
-exports.region = memoize(async (name) => {
+exports.graphics = () => loadFile("fsd", "graphicIDs");
+
+exports.groups = () => loadFile("fsd", "groupIDs");
+
+exports.skinMaterials = () => loadFile("fsd", "skinMaterials");
+
+exports.skinLicenses = () => loadFile("fsd", "skinLicenses");
+
+exports.skins = () => loadFile("fsd", "skins");
+
+exports.landmarks = () => loadFile("fsd", "landmarks", "landmarks");
+
+exports.region = async (name) => {
     try {
-        return await loadFile("fsd", "universe", "eve", name, "region")
+        return await loadFile("fsd", "universe", "eve", name, "region");
     }
     catch(e) {
         return await loadFile("fsd", "universe", "wormhole", name, "region");
     }
-});
+};
 
-exports.lookup = memoize(async (query, lang = "en") => {
-    const types = await exports.types();
-    return Object.entries(types).filter(matches(query, lang));
-});
+exports.lookup = async (query, lang = "en") => {
+    return Object
+        .entries(await exports.types())
+        .filter(matches(query, lang))
+        .map(([id, value]) => ({...value, id: Number(id)}));
+};
 
 const matches = (query, lang) => ([, type]) => {
     return type.name && type.name[lang] && type.name[lang].includes( query );
 };
 
-exports.lookupById = memoize(async (id) => {
+exports.typesForCategory = async (category) => {
+    const [groups, types] = await Promise.all([exports.groups(), exports.types()]);
+    const groupIds = Object
+        .entries(groups)
+        .filter(([,g]) => g.categoryID === category)
+        .map(([id]) => id);
+    return Object
+        .entries(types)
+        .filter(([,t]) => groupIds.includes(t.groupID))
+        .map((id, t) => ({id: Number(id), ...t}));
+};
+
+exports.lookupById = async (id) => {
     const types = await exports.types();
-    return types[id] || null;
-});
+    const result = types[id];
+    if (!result) return null;
+    return {...result, id: Number(id)};
+};
