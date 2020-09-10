@@ -1,30 +1,40 @@
+const Express = require("express");
 const loadFile = require("./load_file");
 
-exports.types = () => loadFile("fsd", "typeIDs");
+const PORT = 60606;
+const app = Express();
 
-exports.icons = () => loadFile("fsd", "iconIDs");
+const GET = (route, handler) => {
+    app.get(route, async (req, res) => res.send(await handler(req.params)));
+};
 
-exports.blueprints = () => loadFile("fsd", "blueprints");
+GET("/types", () => loadFile("fsd", "typeIDs"));
 
-exports.certificates = () => loadFile("fsd", "certificates");
+GET("/icons", () => loadFile("fsd", "iconIDs"));
 
-exports.graphics = () => loadFile("fsd", "graphicIDs");
+GET("/blueprints", () => loadFile("fsd", "blueprints"));
 
-exports.groups = () => loadFile("fsd", "groupIDs");
+GET("/certificates", () => loadFile("fsd", "certificates"));
 
-exports.skinMaterials = () => loadFile("fsd", "skinMaterials");
+GET("/graphics", () => loadFile("fsd", "graphicIDs"));
 
-exports.skinLicenses = () => loadFile("fsd", "skinLicenses");
+GET("/groups", () => loadFile("fsd", "groupIDs"));
 
-exports.skins = () => loadFile("fsd", "skins");
+GET("/skinMaterials", () => loadFile("fsd", "skinMaterials"));
 
-exports.landmarks = () => loadFile("fsd", "landmarks", "landmarks");
+GET("/skinLicenses", () => loadFile("fsd", "skinLicenses"));
 
-exports.region = async (name) => {
+GET("/skins", () => loadFile("fsd", "skins"));
+
+GET("/landmarks", () => loadFile("fsd", "landmarks", "landmarks"));
+
+GET("/region/:name", async ({name}) => {
     try {
         return await loadFile("fsd", "universe", "eve", name, "region");
     }
     catch(e) {
         return await loadFile("fsd", "universe", "wormhole", name, "region");
     }
-};
+});
+
+app.listen(PORT, () => console.log(`Running on port ${PORT}`));

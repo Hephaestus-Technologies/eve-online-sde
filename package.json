@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/weswigham/eve-online-sde#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "js-yaml": "^3.10.0"
   },
   "devDependencies": {
