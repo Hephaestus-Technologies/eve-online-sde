@@ -36,7 +36,7 @@ const entityById = async (entityId, getAllEntities) => {
     return entity ? entityFromEntry([entityId, entity]) : null;
 };
 
-const entityFromEntry = ([entityId, value]) => ({entityId: Number(entityId), ...value});
+const entityFromEntry = ([entityId, value]) => ({entityID: Number(entityId), ...value});
 
 const GET = (route, handler) => {
     app.get(route, async (req, res) => res.send(await handler(req.params, req.query)));
