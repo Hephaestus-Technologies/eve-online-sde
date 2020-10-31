@@ -75,4 +75,6 @@ GET("/region/:name", async ({name}) => {
     }
 });
 
+GET("/schematics", () => loadFile("bsd", "planetSchematicsTypeMap"));
+
 app.listen(PORT, () => console.log(`Running on port ${PORT}`));

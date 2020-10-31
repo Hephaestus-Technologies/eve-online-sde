@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "baseUrl": ".",
+    "target": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "declaration": true,
+    "newLine": "lf",
+    "outDir": "api/dist"
+  },
+  "exclude": ["api/dist/**/*", "node_modules", "sde", "scripts", ".github"]
+}

@@ -1,0 +1,44 @@
+name: Publish API
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'api/**'
+
+jobs:
+
+  publish-gpr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: '0'
+          token: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
+          persist-credentials: false
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@hephaestus-technologies'
+
+      - name: Bump version and push tag
+        id: bump_version
+        uses: anothrNick/github-tag-action@1.26.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
+          WITH_V: true
+          PRERELEASE_SUFFIX: dev
+
+      - name: Compile project
+        run: npm run build-api
+        env:
+          version: ${{ steps.bump_version.outputs.new_tag }}
+          NODE_AUTH_TOKEN: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
+
+      - name: Publish package
+        run: npm publish api/dist
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
