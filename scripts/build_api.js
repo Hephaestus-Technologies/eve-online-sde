@@ -14,7 +14,11 @@ const packageJson = () => {
         "version": version(),
         "description": "Just an API exposing the data from the EVE Online static data export",
         "main": "api/index.js",
-        "license": "MIT"
+        "license": "MIT",
+        "dependencies": {
+            "@hephaestus-technologies/eve-entities": "^0.1.6",
+            "axios": "^0.19.0"
+        }
     };
 };
 
