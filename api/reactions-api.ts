@@ -1,6 +1,6 @@
-import RestApi from "./utils/rest_api";
-import BlueprintAdapter from "./adapters/blueprint-adapter";
+import RestApi from "../utils/rest-api";
 import Activity from "@hephaestus-technologies/eve-entities/dist/manufacturing/activity";
+import {toReactionEntity} from "../records/blueprint-record";
 
 export default class ReactionsApi {
 
@@ -13,9 +13,8 @@ export default class ReactionsApi {
     public async getAll(): Promise<Activity[]> {
         const results = await this._restApi.get("blueprints");
         return Object
-            .entries(results)
-            .map(([id, r]) => new BlueprintAdapter(id, r))
-            .map(a => a.toReaction());
+            .values(results)
+            .map(toReactionEntity);
     }
 
 }

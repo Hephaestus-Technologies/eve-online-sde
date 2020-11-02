@@ -1,6 +1,6 @@
 import BlueprintsApi from "./blueprints-api";
 import ItemTypesApi from "./item-types-api";
-import RestApi from "./utils/rest_api";
+import RestApi from "../utils/rest-api";
 import SchematicsApi from "./schematics-api";
 import ReactionsApi from "./reactions-api";
 

@@ -1,6 +1,7 @@
-import RestApi from "./utils/rest_api";
-import SchematicAdapter from "./adapters/schematic-adapter";
-import Blueprint from "@hephaestus-technologies/eve-entities/dist/manufacturing/blueprint";
+import RestApi from "../utils/rest-api";
+import {SchematicRecord, toActivityEntity} from "../records/schematic-record";
+import Activity from "@hephaestus-technologies/eve-entities/dist/manufacturing/activity";
+import {groupBy} from "../utils/group-by";
 
 export default class SchematicsApi {
 
@@ -10,29 +11,14 @@ export default class SchematicsApi {
         this._restApi = restApi;
     }
 
-    public async getAll(): Promise<Blueprint[]> {
-        const results = await this._restApi.get("schematics");
-        const schematics = groupBy(results, r => r.schematicID);
-        return schematics.map((g) => SchematicAdapter.toEntity(g.key, g.items));
+    public async getAll(): Promise<Activity[]> {
+        const records = await this._getRaw();
+        const schematics = groupBy(records, r => r.schematicID);
+        return schematics.map(g => toActivityEntity(g.items));
     }
 
-}
+    private _getRaw(): Promise<SchematicRecord[]> {
+        return this._restApi.get("schematics");
+    }
 
-interface Grouping<T> {
-    key: string,
-    items: T[]
-}
-
-function groupBy<T>(arr: T[], key: (T) => string): Grouping<T>[] {
-    const reducer = (groups: {}, item: T): {} => {
-        const k = key(item);
-        return {
-            ...groups,
-            [k]: [
-                ...groups[k],
-                item
-            ]
-        }
-    };
-    return Object.values(arr.reduce(reducer, {}));
 }

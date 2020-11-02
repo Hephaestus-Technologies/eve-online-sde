@@ -1,6 +1,6 @@
 import Blueprint from "@hephaestus-technologies/eve-entities/dist/manufacturing/blueprint";
-import BlueprintAdapter from "./adapters/blueprint-adapter";
-import RestApi from "./utils/rest_api";
+import RestApi from "../utils/rest-api";
+import {toBlueprintEntity} from "../records/blueprint-record";
 
 export default class BlueprintsApi {
 
@@ -11,15 +11,23 @@ export default class BlueprintsApi {
     }
 
     public async getAll(): Promise<Blueprint[]> {
-        const results = await this._restApi.get("blueprints");
         return Object
-            .entries(results)
-            .map(([id, r]) => new BlueprintAdapter(id, r))
-            .map(a => a.toBlueprint());
+            .entries(await this._getRaw(""))
+            .map(BlueprintsApi.castToRecord)
+            .map(([id, record]) => toBlueprintEntity(id, record));
     }
 
-    public async byId(blueprintId: number): Promise<BlueprintAdapter> {
-        const {entityID, ...result} = await this._restApi.get(`blueprints/${blueprintId}`);
-        return new BlueprintAdapter(entityID, result);
+    private static castToRecord([entityID, record]): [any, any] {
+        return [entityID, record];
+    };
+
+    public async byId(blueprintId: number): Promise<Blueprint> {
+        const {entityID, ...record} = await this._getRaw(`/${blueprintId}`);
+        return toBlueprintEntity(entityID, record);
     }
+
+    private _getRaw(url: string) {
+        return this._restApi.get(`blueprints${url}`);
+    }
+
 }

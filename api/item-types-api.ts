@@ -1,7 +1,7 @@
-import ItemTypeAdapter from "./adapters/item-type-adapter";
-import RestApi from "./utils/rest_api";
+import RestApi from "../utils/rest-api";
 import {Category} from "../records/category";
 import ItemType from "@hephaestus-technologies/eve-entities/dist/general/item-type";
+import {toItemTypeEntity} from "../records/item-type-record";
 
 export default class ItemTypesApi {
 
@@ -12,14 +12,13 @@ export default class ItemTypesApi {
     }
 
     public async byId(typeId: number): Promise<ItemType> {
-        const result = await this._restApi.get(`types/${typeId}`);
-        const adapter = new ItemTypeAdapter(result);
-        return adapter.toEntity();
+        const record = await this._restApi.get(`types/${typeId}`);
+        return toItemTypeEntity(record);
     }
 
     public async forCategory(category: Category): Promise<ItemType[]> {
-        const result = await this._restApi.get("types", {category});
-        return result.map(r => new ItemTypeAdapter(r)).map(a => a.toEntity());
+        const records = await this._restApi.get("types", {category});
+        return records.map(toItemTypeEntity);
     }
 
 }
