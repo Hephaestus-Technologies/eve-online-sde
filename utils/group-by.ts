@@ -9,7 +9,7 @@ export function groupBy<T>(arr: T[], key: (T) => string): Grouping<T>[] {
         return {
             ...groups,
             [k]: [
-                ...groups[k],
+                ...(groups[k] || []),
                 item
             ]
         }
