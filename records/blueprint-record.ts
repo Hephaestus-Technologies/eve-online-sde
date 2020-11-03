@@ -60,6 +60,7 @@ const toActivityEntity = (record: ActivityRecord): Activity => {
 }
 
 const toItemBatch = (record: ItemBatchRecord): ItemBatch => {
+    if (!record) return null;
     return {
         typeId: record.typeID,
         quantity: record.quantity
