@@ -14,7 +14,8 @@ export default class BlueprintsApi {
         return Object
             .entries(await this._getRaw(""))
             .map(BlueprintsApi.castToRecord)
-            .map(([id, record]) => toBlueprintEntity(id, record));
+            .map(([id, record]) => toBlueprintEntity(id, record))
+            .filter(Boolean);
     }
 
     private static castToRecord([entityID, record]): [any, any] {

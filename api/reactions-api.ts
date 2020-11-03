@@ -14,7 +14,8 @@ export default class ReactionsApi {
         const results = await this._restApi.get("blueprints");
         return Object
             .values(results)
-            .map(toReactionEntity);
+            .map(toReactionEntity)
+            .filter(Boolean);
     }
 
 }

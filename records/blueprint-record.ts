@@ -34,6 +34,7 @@ export interface BlueprintRecord {
 }
 
 export const toBlueprintEntity = (blueprintId, record: BlueprintRecord): Blueprint => {
+    if (record.activities.reaction) return null;
     return {
         blueprintId: Number(blueprintId),
         manufacturing: toActivityEntity(record.activities.manufacturing),
@@ -45,8 +46,8 @@ export const toBlueprintEntity = (blueprintId, record: BlueprintRecord): Bluepri
 };
 
 export const toReactionEntity = (record: BlueprintRecord): Activity => {
-    const reaction = record.activities.reaction;
-    return toActivityEntity(reaction);
+    if (!record.activities.reaction) return null;
+    return toActivityEntity(record.activities.reaction);
 };
 
 const toActivityEntity = (record: ActivityRecord): Activity => {
