@@ -1,6 +1,6 @@
-import ItemBatch from "@hephaestus-technologies/eve-entities/dist/general/item-batch";
-import Activity from "@hephaestus-technologies/eve-entities/dist/manufacturing/activity";
-import Blueprint from "@hephaestus-technologies/eve-entities/dist/manufacturing/blueprint";
+import ItemBatch from "entities/general/item-batch";
+import Activity from "entities/manufacturing/activity";
+import Blueprint from "entities/manufacturing/blueprint";
 import ItemBatchRecord from "./item-batch-record";
 import SkillReqRecord from "./skill-req-record";
 

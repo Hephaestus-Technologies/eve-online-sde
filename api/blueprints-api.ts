@@ -1,4 +1,4 @@
-import Blueprint from "@hephaestus-technologies/eve-entities/dist/manufacturing/blueprint";
+import Blueprint from "entities/manufacturing/blueprint";
 import RestApi from "../utils/rest-api";
 import {toBlueprintEntity} from "../records/blueprint-record";
 

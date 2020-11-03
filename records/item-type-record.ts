@@ -1,8 +1,8 @@
-import {BlueprintGroup} from "@hephaestus-technologies/eve-entities/dist/general/blueprint-group";
-import ItemType, {Group} from "@hephaestus-technologies/eve-entities/dist/general/item-type";
-import {ManufacturingGroup} from "@hephaestus-technologies/eve-entities/dist/general/manufacturing-group";
-import {PiGroup} from "@hephaestus-technologies/eve-entities/dist/general/pi-group";
-import {ReactionGroup} from "@hephaestus-technologies/eve-entities/dist/general/reaction-group";
+import {BlueprintGroup} from "entities/general/blueprint-group";
+import ItemType, {Subgroup} from "entities/general/item-type";
+import {ManufacturingGroup} from "entities/general/manufacturing-group";
+import {PiGroup} from "entities/general/pi-group";
+import {ReactionGroup} from "entities/general/reaction-group";
 import {NameRecord} from "./name-record";
 
 export interface ItemTypeRecord {
@@ -37,7 +37,7 @@ const toGroup = (groupId: number): ManufacturingGroup  => {
     return ManufacturingGroup.OTHER;
 }
 
-const toSubgroup = (group: ManufacturingGroup, groupId: number): Group  => {
+const toSubgroup = (group: ManufacturingGroup, groupId: number): Subgroup  => {
     switch (group) {
         case ManufacturingGroup.BLUEPRINT:
             return toBlueprintGroup(groupId);

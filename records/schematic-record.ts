@@ -1,5 +1,5 @@
-import ItemBatch from "@hephaestus-technologies/eve-entities/dist/general/item-batch";
-import Activity from "@hephaestus-technologies/eve-entities/dist/manufacturing/activity";
+import ItemBatch from "entities/general/item-batch";
+import Activity from "entities/manufacturing/activity";
 
 export interface SchematicRecord {
 

@@ -1,5 +1,5 @@
 import RestApi from "../utils/rest-api";
-import Activity from "@hephaestus-technologies/eve-entities/dist/manufacturing/activity";
+import Activity from "entities/manufacturing/activity";
 import {toReactionEntity} from "../records/blueprint-record";
 
 export default class ReactionsApi {
