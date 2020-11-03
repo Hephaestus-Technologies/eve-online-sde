@@ -34,7 +34,7 @@ export interface BlueprintRecord {
 }
 
 export const toBlueprintEntity = (blueprintId, record: BlueprintRecord): Blueprint => {
-    if (!record.activities.manufacturing) return null;
+    if (!isValid(record.activities.manufacturing)) return null;
     return {
         blueprintId: Number(blueprintId),
         manufacturing: toActivityEntity(record.activities.manufacturing),
@@ -46,7 +46,7 @@ export const toBlueprintEntity = (blueprintId, record: BlueprintRecord): Bluepri
 };
 
 export const toReactionEntity = (record: BlueprintRecord): Activity => {
-    if (!record.activities.reaction) return null;
+    if (!isValid(record.activities.reaction)) return null;
     return toActivityEntity(record.activities.reaction);
 };
 
@@ -66,4 +66,12 @@ const toItemBatch = (record: ItemBatchRecord): ItemBatch => {
         typeId: record.typeID,
         quantity: record.quantity
     };
+}
+
+const isValid = (activity: ActivityRecord): Boolean => {
+    return (
+        Boolean(activity) &&
+        Boolean(activity.products) &&
+        Boolean(activity.products[0])
+    );
 }
