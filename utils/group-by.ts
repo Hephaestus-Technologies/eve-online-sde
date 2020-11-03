@@ -14,5 +14,6 @@ export function groupBy<T>(arr: T[], key: (T) => string): Grouping<T>[] {
             ]
         }
     };
-    return Object.values(arr.reduce(reducer, {}));
+    const groupings = arr.reduce(reducer, {});
+    return Object.values(groupings).map(([key, items]) => ({key, items}));
 }
