@@ -14,7 +14,10 @@ export default class SchematicsApi {
     public async getAll(): Promise<Activity[]> {
         const records = await this._getRaw();
         const schematics = groupBy(records, r => r.schematicID);
-        return schematics.map(g => toActivityEntity(g.items));
+        return schematics.map(g => {
+            if (!g.items.find) debugger
+            return toActivityEntity(g.items);
+        });
     }
 
     private _getRaw(): Promise<SchematicRecord[]> {
