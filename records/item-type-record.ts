@@ -28,7 +28,7 @@ export const toItemTypeEntity = (record: ItemTypeRecord): ItemType => {
 const toGroup = (groupId: number): ManufacturingGroup  => {
     if ([18, 422, 423].includes(groupId))
         return ManufacturingGroup.MINERALS;
-    if ([1034, 1040, 1041, 1042].includes(groupId))
+    if ([1032, 1033, 1034, 1035, 1040, 1041, 1042].includes(groupId))
         return ManufacturingGroup.PI;
     if ([427, 428, 429].includes(groupId))
         return ManufacturingGroup.REACTION;
