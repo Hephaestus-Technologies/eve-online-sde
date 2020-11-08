@@ -16,11 +16,8 @@ const packageJson = () => {
         "main": "api/index.js",
         "license": "MIT",
         "dependencies": {
-            "@hephaestus-technologies/eve-entities": "^0.1.9",
-            "axios": "^0.19.0",
-            "tsconfig-paths": "^3.9.0"
-        },
-        "devDependencies": {
+            "entities": "npm:@hephaestus-technologies/eve-entities@^0.1.9",
+            "axios": "^0.19.0"
         }
     };
 };
