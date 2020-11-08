@@ -2,9 +2,6 @@
   "compilerOptions": {
     "module": "CommonJS",
     "baseUrl": ".",
-    "paths":  {
-      "entities/*": ["node_modules/@hephaestus-technologies/eve-entities/dist/node/*"]
-    },
     "target": "ESNext",
     "allowSyntheticDefaultImports": true,
     "alwaysStrict": true,

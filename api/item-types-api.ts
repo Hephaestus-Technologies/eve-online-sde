@@ -1,6 +1,6 @@
 import RestApi from "../utils/rest-api";
 import {Category} from "../records/category";
-import ItemType from "entities/general/item-type";
+import ItemType from "entities/dist/node/general/item-type";
 import {toItemTypeEntity} from "../records/item-type-record";
 
 export default class ItemTypesApi {

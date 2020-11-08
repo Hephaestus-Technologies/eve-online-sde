@@ -4,8 +4,8 @@ import RestApi from "../utils/rest-api";
 import SchematicsApi from "./schematics-api";
 import ReactionsApi from "./reactions-api";
 
-export default () => {
-    const restApi = new RestApi("http://localhost:60606");
+export default (endpoint: string) => {
+    const restApi = new RestApi(endpoint);
     return {
         types: new ItemTypesApi(restApi),
         blueprints: new BlueprintsApi(restApi),

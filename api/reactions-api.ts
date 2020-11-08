@@ -1,5 +1,5 @@
 import RestApi from "../utils/rest-api";
-import Activity from "entities/manufacturing/activity";
+import Activity from "entities/dist/node/manufacturing/activity";
 import {toReactionEntity} from "../records/blueprint-record";
 
 export default class ReactionsApi {

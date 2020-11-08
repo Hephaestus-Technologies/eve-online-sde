@@ -1,8 +1,10 @@
 const Express = require("express");
 const loadFile = require("./load_file");
+const cors = require("cors");
 
-const PORT = 60606;
+const PORT = 80;
 const app = Express();
+app.use(cors());
 
 const getAllGroups = () => loadFile("fsd", "groupIDs");
 

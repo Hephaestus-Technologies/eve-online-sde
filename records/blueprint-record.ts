@@ -1,6 +1,6 @@
-import ItemBatch from "entities/general/item-batch";
-import Activity from "entities/manufacturing/activity";
-import Blueprint from "entities/manufacturing/blueprint";
+import ItemBatch from "entities/dist/node/general/item-batch";
+import Activity from "entities/dist/node/manufacturing/activity";
+import Blueprint from "entities/dist/node/manufacturing/blueprint";
 import ItemBatchRecord from "./item-batch-record";
 import SkillReqRecord from "./skill-req-record";
 

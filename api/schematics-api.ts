@@ -1,6 +1,6 @@
 import RestApi from "../utils/rest-api";
 import {SchematicRecord, toActivityEntity} from "../records/schematic-record";
-import Activity from "entities/manufacturing/activity";
+import Activity from "entities/dist/node/manufacturing/activity";
 import {groupBy} from "../utils/group-by";
 
 export default class SchematicsApi {

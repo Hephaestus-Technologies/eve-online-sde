@@ -1,4 +1,4 @@
-import Blueprint from "entities/manufacturing/blueprint";
+import Blueprint from "entities/dist/node/manufacturing/blueprint";
 import RestApi from "../utils/rest-api";
 import {toBlueprintEntity} from "../records/blueprint-record";
 
