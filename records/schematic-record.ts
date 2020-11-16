@@ -1,5 +1,5 @@
-import ItemBatch from "entities/dist/node/general/item-batch";
-import Activity from "entities/dist/node/manufacturing/activity";
+import ItemBatch from "entities/general/item-batch";
+import Activity from "entities/manufacturing/activity";
 
 export interface SchematicRecord {
 

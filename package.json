@@ -1,6 +1,5 @@
 {
   "name": "@hephaestus-technologies/eve-online-sde",
-  "version": "122.8.7+Invasion-1.0",
   "description": "Just an API exposing the data from the EVE Online static data export",
   "main": "index.js",
   "keywords": [
@@ -14,21 +13,22 @@
   "author": "Wesley Wigham (weswigham)",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1",
-    "js-yaml": "^3.10.0",
-    "entities": "npm:@hephaestus-technologies/eve-entities@^0.1.9",
     "axios": "^0.19.0",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "entities": "npm:@hephaestus-technologies/eve-entities@^0.2.0",
+    "express": "^4.17.1",
+    "fstream": "^1.0.12",
+    "js-yaml": "^3.10.0"
   },
   "devDependencies": {
-    "rimraf": "^2.6.1",
+    "npm": "^6.14.8",
     "scrape-it": "^3.3.0",
     "unzipper": "^0.8.8",
     "typescript": "^4.0.5",
     "tsconfig-paths": "^3.9.0"
   },
   "scripts": {
-    "update-sde": "node ./scripts/update-sde.js",
-    "build-api": "node ./scripts/build_api.js"
+    "update-sde": "node scripts/update-sde.mjs",
+    "build-api": "node scripts/build-api.js"
   }
 }

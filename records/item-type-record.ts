@@ -1,8 +1,8 @@
-import {BlueprintGroup} from "entities/dist/node/general/blueprint-group";
-import ItemType, {Subgroup} from "entities/dist/node/general/item-type";
-import {ManufacturingGroup} from "entities/dist/node/general/manufacturing-group";
-import {PiGroup} from "entities/dist/node/general/pi-group";
-import {ReactionGroup} from "entities/dist/node/general/reaction-group";
+import {BlueprintGroup} from "entities/general/blueprint-group";
+import ItemType, {Subgroup} from "entities/general/item-type";
+import {ManufacturingGroup} from "entities/general/manufacturing-group";
+import {PiGroup} from "entities/general/pi-group";
+import {ReactionGroup} from "entities/general/reaction-group";
 import {NameRecord} from "./name-record";
 
 export interface ItemTypeRecord {

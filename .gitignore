@@ -44,8 +44,6 @@ sde.zip
 
 **/package-lock.json
 
-**/build
-**/dist
-
 api/package.json
 sde/
+.bin/

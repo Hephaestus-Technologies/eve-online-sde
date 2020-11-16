@@ -3,11 +3,14 @@
     "module": "CommonJS",
     "baseUrl": ".",
     "target": "ESNext",
-    "allowSyntheticDefaultImports": true,
     "alwaysStrict": true,
     "declaration": true,
     "newLine": "lf",
-    "outDir": "api/build"
+    "outDir": ".bin/api",
+    "paths": {
+      "entities/*": ["node_modules/entities/node/*"]
+    }
   },
-  "exclude": ["api/build/**/*", "node_modules", "sde", "scripts", ".github"]
+  "compileOnSave": true,
+  "exclude": [".bin/**/*", "node_modules", "sde", "scripts", ".github"]
 }
