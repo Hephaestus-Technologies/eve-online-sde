@@ -5,7 +5,7 @@ const {exec} = require("child_process");
 const run = async () => {
     await spawnChild("npm", "install")
     await spawnChild("tsc", "--project", "tsconfig.json");
-    writeFileSync("api/build/package.json", JSON.stringify(packageJson(), null, 2));
+    writeFileSync(".bin/api/package.json", JSON.stringify(packageJson(), null, 2));
 };
 
 const packageJson = () => {

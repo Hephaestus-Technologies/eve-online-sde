@@ -15,12 +15,13 @@
   "dependencies": {
     "axios": "^0.19.0",
     "cors": "^2.8.5",
-    "entities": "npm:@hephaestus-technologies/eve-entities@^0.1.9",
+    "entities": "npm:@hephaestus-technologies/eve-entities@^0.2.0",
     "express": "^4.17.1",
     "fstream": "^1.0.12",
     "js-yaml": "^3.10.0"
   },
   "devDependencies": {
+    "npm": "^6.14.8",
     "scrape-it": "^3.3.0",
     "unzipper": "^0.8.8",
     "typescript": "^4.0.5",
