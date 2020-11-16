@@ -2,7 +2,10 @@ const Express = require("express");
 const loadFile = require("./load_file");
 const cors = require("cors");
 
-const PORT = 80;
+const config = {
+    port: process.env.PORT
+};
+
 const app = Express();
 app.use(cors());
 
@@ -79,4 +82,4 @@ GET("/region/:name", async ({name}) => {
 
 GET("/schematics", () => loadFile("bsd", "planetSchematicsTypeMap"));
 
-app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+app.listen(config.port, () => console.log(`Running on port ${config.port}`));
