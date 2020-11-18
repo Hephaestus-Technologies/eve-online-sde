@@ -3,7 +3,7 @@ import ItemTypesApi from "./item-types-api";
 import RestApi from "../utils/rest-api";
 import SchematicsApi from "./schematics-api";
 import ReactionsApi from "./reactions-api";
-import ISdeApi from "./ISdeApi";
+import ISdeApi from "./i-sde-api";
 
 // noinspection JSUnusedGlobalSymbols
 export default (endpoint: string): ISdeApi => {
