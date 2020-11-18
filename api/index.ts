@@ -3,8 +3,10 @@ import ItemTypesApi from "./item-types-api";
 import RestApi from "../utils/rest-api";
 import SchematicsApi from "./schematics-api";
 import ReactionsApi from "./reactions-api";
+import ISdeApi from "./ISdeApi";
 
-export default (endpoint: string) => {
+// noinspection JSUnusedGlobalSymbols
+export default (endpoint: string): ISdeApi => {
     const restApi = new RestApi(endpoint);
     return {
         types: new ItemTypesApi(restApi),
