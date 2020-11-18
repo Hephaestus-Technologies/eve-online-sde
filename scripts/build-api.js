@@ -16,7 +16,7 @@ const packageJson = () => {
         "main": "api/index.js",
         "license": "MIT",
         "dependencies": {
-            "entities": "npm:@hephaestus-technologies/eve-entities@^0.1.9",
+            "entities": "npm:@hephaestus-technologies/eve-entities@^0.2.0",
             "axios": "^0.19.0"
         }
     };
